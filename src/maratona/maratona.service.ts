@@ -1,5 +1,5 @@
 import {Controller, Get, Injectable, Post, Req} from '@nestjs/common';
-import {Maratona} from "../entities/Maratona";
+import {Maratona} from "./maratona.model";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 
@@ -15,9 +15,9 @@ export class MaratonaService {
         return this.maratonaRepository.find();
     }
 
-    create(maratona): Promise<Maratona> {
-        const m = new Maratona();
-        m.aula = maratona.aula;
-        return this.maratonaRepository.save(m);
+    async create(maratona): Promise<any> {
+        const m = this.maratonaRepository.create(maratona);
+        await this.maratonaRepository.save(m);
+        return m;
     }
 }

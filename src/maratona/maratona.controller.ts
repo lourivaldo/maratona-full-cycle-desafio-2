@@ -16,6 +16,6 @@ export class MaratonaController {
 
     @Post()
     async create(@Req() request: Request) {
-        return await this.maratonaService.create(request.body);
+        return await this.maratonaService.create(request.body as any);
     }
 }
